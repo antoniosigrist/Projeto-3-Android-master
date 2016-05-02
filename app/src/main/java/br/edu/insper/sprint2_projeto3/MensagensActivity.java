@@ -16,6 +16,8 @@ import android.support.v4.app.ActivityCompat;
 
 public class MensagensActivity extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,7 @@ public class MensagensActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 0);
         }
 
-        final EditText phoneEdit = (EditText) findViewById(R.id.editText);
+        final EditText phoneEdit = (EditText) findViewById(R.id.enterPhone);
 
         Button sms1 = (Button) findViewById(R.id.sms1);
         assert sms1 != null;
@@ -35,14 +37,18 @@ public class MensagensActivity extends AppCompatActivity {
         sms1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                System.out.println("Entrou1");
+                //checar aqui
                 SmsManager manager = SmsManager.getDefault();
                 String phone = phoneEdit.getText().toString();
+                System.out.println(phone);
                 if(PhoneNumberUtils.isWellFormedSmsAddress(phone)) {
+                    System.out.println("Entrou11");
                     manager.sendTextMessage(phone, null, "Preciso de Ajuda!", null, null);
                     Toast.makeText(MensagensActivity.this, "Torpedo enviado!", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    System.out.println("Entrou12");
                     Toast.makeText(MensagensActivity.this, "Número inválido!", Toast.LENGTH_SHORT).show();
                 }
             }
